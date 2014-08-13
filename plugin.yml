@@ -1,0 +1,21 @@
+name: TotalEconomy
+main: com.erigitic.main.TotalEconomy
+version: 8.0.1
+depend: [Vault]
+
+commands:
+  bal:
+    description: Displays account balance.
+    usage: /bal
+  job:
+    description: Job commands.
+    usage: /job
+  job levels:
+    description: Display job levels.
+    usage: /job levels
+  job set:
+    description: Set current job.
+    usage: /job set [JOB]
+  job list:
+    description: Get list of jobs.
+    usage: /job list
