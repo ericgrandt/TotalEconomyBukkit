@@ -1,3 +1,2 @@
 Additions
-***
 + Metrics support
