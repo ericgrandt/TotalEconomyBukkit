@@ -4,10 +4,7 @@ import com.erigitic.configs.AccountsManager;
 import com.erigitic.configs.SettingsManager;
 import com.erigitic.jobs.Jobs;
 import com.erigitic.shops.ChestShop;
-import net.milkbowl.vault.chat.Chat;
 import net.milkbowl.vault.economy.Economy;
-import net.milkbowl.vault.economy.EconomyResponse;
-import net.milkbowl.vault.permission.Permission;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
@@ -18,7 +15,7 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.ServicePriority;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.text.DecimalFormat;
+import java.io.IOException;
 import java.util.logging.Logger;
 
 public class TotalEconomy extends JavaPlugin {
@@ -47,6 +44,19 @@ public class TotalEconomy extends JavaPlugin {
         jobs = new Jobs(this);
         shop = new ChestShop(this);
         pListener = new PlayerListener(this);
+
+        try {
+            Metrics metrics = new Metrics(this);
+
+            if (!metrics.isOptOut()) {
+                metrics.start();
+                log.info("[Total Economy]Metrics enabled. To disable, set opt out to true in the PluginMetrics config file.");
+            } else {
+                log.info("[Total Economy]Metrics disabled. To enable, set opt out to false in the PluginMetrics config file.");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         if (Bukkit.getServer().getPluginManager().getPlugin("Vault") != null) {
             Bukkit.getServer().getServicesManager().register(Economy.class, new VaultConnect(), this, ServicePriority.Highest);
