@@ -23,7 +23,7 @@ public class TotalEconomy extends JavaPlugin {
     private static final Logger log = Logger.getLogger("Minecraft");
     public static Economy econ = null;
 
-    private String VERSION = "8.0.1";
+    private String VERSION = "8.0.2";
 
     private PlayerListener pListener;
 
