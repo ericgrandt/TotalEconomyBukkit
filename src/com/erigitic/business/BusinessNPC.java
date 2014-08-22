@@ -22,16 +22,22 @@ public class BusinessNPC implements Listener {
         OfflinePlayer player = Bukkit.getOfflinePlayer(uuid);
         World world = player.getPlayer().getWorld();
         Villager villager = world.spawn(player.getPlayer().getLocation(), Villager.class);//Spawn villager at the player's location
+        villager.setAge(9999);
+        villager.setAgeLock(true);
     }
 
     @EventHandler
     public void onVillagerClick(PlayerInteractEntityEvent event) {
         if (event.getRightClicked() instanceof Villager) {
-            OfflinePlayer p = event.getPlayer();
-            ItemStack license = createLicense();
+            Villager villager = (Villager) event.getRightClicked();
 
-            p.getPlayer().getInventory().addItem(license);
-            p.getPlayer().updateInventory();
+            if (villager.getAge() == 9999) {
+                OfflinePlayer p = event.getPlayer();
+                ItemStack license = createLicense();
+
+                p.getPlayer().getInventory().addItem(license);
+                p.getPlayer().updateInventory();
+            }
         }
     }
 
