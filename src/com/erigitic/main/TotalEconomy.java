@@ -1,5 +1,6 @@
 package com.erigitic.main;
 
+import com.erigitic.business.BusinessNPC;
 import com.erigitic.configs.AccountsManager;
 import com.erigitic.configs.SettingsManager;
 import com.erigitic.jobs.Jobs;
@@ -25,13 +26,6 @@ public class TotalEconomy extends JavaPlugin {
 
     private String VERSION = "8.0.2";
 
-    private PlayerListener pListener;
-
-    private AccountsManager aManager;
-    private SettingsManager sManager;
-    private Jobs jobs;
-    private ChestShop shop;
-
     @Override
     public void onEnable() {
         PluginManager pM = getServer().getPluginManager();
@@ -39,11 +33,10 @@ public class TotalEconomy extends JavaPlugin {
         AccountsManager.getInstance().setup(this);
         SettingsManager.getInstance().setup(this);
 
-        aManager = AccountsManager.getInstance();
-        sManager = SettingsManager.getInstance();
-        jobs = new Jobs(this);
-        shop = new ChestShop(this);
-        pListener = new PlayerListener(this);
+        Jobs jobs = new Jobs(this);
+        ChestShop shop = new ChestShop(this);
+        PlayerListener pListener = new PlayerListener(this);
+        BusinessNPC businessNPC = new BusinessNPC();
 
         try {
             Metrics metrics = new Metrics(this);
@@ -75,6 +68,7 @@ public class TotalEconomy extends JavaPlugin {
         pM.registerEvents(pListener, this);
         pM.registerEvents(shop, this);
         pM.registerEvents(jobs, this);
+        pM.registerEvents(businessNPC, this);
     }
 
     @Override
