@@ -19,13 +19,6 @@ import java.util.ArrayList;
 
 public class Jobs implements Listener, CommandExecutor {
 
-    /*
-     To calculate exp total for nextLevel:
-     expTotal = (nextLevel^2 + nextLevel)/2 * 100 - (nextLevel * 100);
-
-     To calculate how much exp left to level:
-     expLeftToLevel = expTotal - curExp;
-     */
     private String[] jobs = {"Miner"};
 
     private Plugin p;
@@ -104,10 +97,6 @@ public class Jobs implements Listener, CommandExecutor {
                     addPay(player, pay, curJob);
                 }
             }
-        }
-
-        if (block.getType() == Material.DIRT) {
-
         }
 
         isLeveled(player, curJob);
